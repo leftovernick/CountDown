@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		8344400924DE176D00A15AAD /* CountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8344400824DE176D00A15AAD /* CountdownViewController.swift */; };
 		8344400C24DE194500A15AAD /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8344400B24DE194500A15AAD /* EventCollectionViewCell.swift */; };
-		8344400E24DE1C1F00A15AAD /* CountdownHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8344400D24DE1C1F00A15AAD /* CountdownHeaderCollectionReusableView.swift */; };
-		835F179B24DF2B8D0083C8A9 /* CountdownsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835F179A24DF2B8D0083C8A9 /* CountdownsCollectionViewController.swift */; };
 		839DCC8424DDFB0900A4EF9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839DCC8324DDFB0900A4EF9A /* AppDelegate.swift */; };
 		839DCC8624DDFB0900A4EF9A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839DCC8524DDFB0900A4EF9A /* SceneDelegate.swift */; };
 		839DCC8B24DDFB0900A4EF9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 839DCC8924DDFB0900A4EF9A /* Main.storyboard */; };
@@ -18,6 +16,8 @@
 		839DCC9024DDFB0900A4EF9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 839DCC8E24DDFB0900A4EF9A /* LaunchScreen.storyboard */; };
 		839DCC9B24DDFB0A00A4EF9A /* CountDownTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839DCC9A24DDFB0A00A4EF9A /* CountDownTests.swift */; };
 		839DCCA624DDFB0A00A4EF9A /* CountDownUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839DCCA524DDFB0A00A4EF9A /* CountDownUITests.swift */; };
+		83EBC5A124DFD94F00B9F6EE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EBC5A024DFD94F00B9F6EE /* Extensions.swift */; };
+		83EBC5A524DFDA2F00B9F6EE /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EBC5A424DFDA2F00B9F6EE /* Event.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,8 +40,6 @@
 /* Begin PBXFileReference section */
 		8344400824DE176D00A15AAD /* CountdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownViewController.swift; sourceTree = "<group>"; };
 		8344400B24DE194500A15AAD /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
-		8344400D24DE1C1F00A15AAD /* CountdownHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
-		835F179A24DF2B8D0083C8A9 /* CountdownsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownsCollectionViewController.swift; sourceTree = "<group>"; };
 		839DCC8024DDFB0900A4EF9A /* CountDown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountDown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		839DCC8324DDFB0900A4EF9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		839DCC8524DDFB0900A4EF9A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +53,8 @@
 		839DCCA124DDFB0A00A4EF9A /* CountDownUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountDownUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		839DCCA524DDFB0A00A4EF9A /* CountDownUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownUITests.swift; sourceTree = "<group>"; };
 		839DCCA724DDFB0A00A4EF9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83EBC5A024DFD94F00B9F6EE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		83EBC5A424DFDA2F00B9F6EE /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,8 +86,6 @@
 			isa = PBXGroup;
 			children = (
 				8344400824DE176D00A15AAD /* CountdownViewController.swift */,
-				8344400D24DE1C1F00A15AAD /* CountdownHeaderCollectionReusableView.swift */,
-				835F179A24DF2B8D0083C8A9 /* CountdownsCollectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -123,9 +121,11 @@
 		839DCC8224DDFB0900A4EF9A /* CountDown */ = {
 			isa = PBXGroup;
 			children = (
+				83EBC5A324DFDA0F00B9F6EE /* Models */,
 				839DCC8924DDFB0900A4EF9A /* Main.storyboard */,
 				839DCC8324DDFB0900A4EF9A /* AppDelegate.swift */,
 				839DCC8524DDFB0900A4EF9A /* SceneDelegate.swift */,
+				83EBC59E24DFD7E500B9F6EE /* Helpers */,
 				8344400A24DE192400A15AAD /* Cells */,
 				8344400724DE171D00A15AAD /* ViewControllers */,
 				839DCC8C24DDFB0900A4EF9A /* Assets.xcassets */,
@@ -151,6 +151,22 @@
 				839DCCA724DDFB0A00A4EF9A /* Info.plist */,
 			);
 			path = CountDownUITests;
+			sourceTree = "<group>";
+		};
+		83EBC59E24DFD7E500B9F6EE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				83EBC5A024DFD94F00B9F6EE /* Extensions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		83EBC5A324DFDA0F00B9F6EE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				83EBC5A424DFDA2F00B9F6EE /* Event.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,12 +299,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				835F179B24DF2B8D0083C8A9 /* CountdownsCollectionViewController.swift in Sources */,
-				8344400E24DE1C1F00A15AAD /* CountdownHeaderCollectionReusableView.swift in Sources */,
 				8344400924DE176D00A15AAD /* CountdownViewController.swift in Sources */,
 				8344400C24DE194500A15AAD /* EventCollectionViewCell.swift in Sources */,
 				839DCC8424DDFB0900A4EF9A /* AppDelegate.swift in Sources */,
 				839DCC8624DDFB0900A4EF9A /* SceneDelegate.swift in Sources */,
+				83EBC5A524DFDA2F00B9F6EE /* Event.swift in Sources */,
+				83EBC5A124DFD94F00B9F6EE /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

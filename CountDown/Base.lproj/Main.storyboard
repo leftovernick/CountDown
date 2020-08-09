@@ -14,6 +14,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CXy-Dp-Vbx">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="QEq-2d-162" kind="relationship" relationship="rootViewController" id="Quf-6F-Rbm"/>
@@ -23,7 +27,7 @@
             </objects>
             <point key="canvasLocation" x="-117" y="-183"/>
         </scene>
-        <!--Countdown View Controller-->
+        <!--Countdown-->
         <scene sceneID="jQF-Xk-Egv">
             <objects>
                 <viewController id="QEq-2d-162" customClass="CountdownViewController" customModule="CountDown" customModuleProvider="target" sceneMemberID="viewController">
@@ -33,7 +37,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="c3n-tz-TOl"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Eb2-2J-al9"/>
+                    <navigationItem key="navigationItem" title="Countdown" id="Eb2-2J-al9"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gjo-Og-7jz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
