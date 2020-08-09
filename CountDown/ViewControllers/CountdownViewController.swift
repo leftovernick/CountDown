@@ -9,64 +9,38 @@ import UIKit
 
 
 
-struct DataId {
+struct DataSections {
     var month = ""
     var count = 0
+    var events : [Event] = []
 }
 
 class CountdownViewController: UIViewController{
     
     let collectionViewHeaderReuseIdentifier = "HeaderClass"
-
     
-    var sortedData : [[Any]] = [
-        [DataId(month: "This Month", count: 0)],
-        [DataId(month: "January", count: 0)],
-        [DataId(month: "February", count: 0)],
-        [DataId(month: "March", count: 0)],
-        [DataId(month: "April", count: 0)],
-        [DataId(month: "May", count: 0)],
-        [DataId(month: "June", count: 0)],
-        [DataId(month: "July", count: 0)],
-        [DataId(month: "August", count: 0)],
-        [DataId(month: "September", count: 0)],
-        [DataId(month: "November", count: 0)],
-        [DataId(month: "December", count: 0)],
-        [DataId(month: "This Year", count: 0)],
-        [DataId(month: "More", count: 0)]
+    var sortedData : [DataSections] = [
+        DataSections(month: "This Month"),
+        DataSections(month: "January"),
+        DataSections(month: "February"),
+        DataSections(month: "March"),
+        DataSections(month: "April"),
+        DataSections(month: "May"),
+        DataSections(month: "June"),
+        DataSections(month: "July"),
+        DataSections(month: "August"),
+        DataSections(month: "September"),
+        DataSections(month: "October"),
+        DataSections(month: "November"),
+        DataSections(month: "December"),
+        DataSections(month: "This Year"),
+        DataSections(month: "More")
     ]
-
-    var currentMonthData : [Event] = []
-    var januaryData: [Event] = []
-    var februaryData: [Event] = []
-    var marchData: [Event] = []
-    var aprilData: [Event] = []
-    var mayData: [Event] = []
-    var juneData: [Event] = []
-    var julyData: [Event] = []
-    var augustData: [Event] = []
-    var septemberData: [Event] = []
-    var octoberData: [Event] = []
-    var novemberData: [Event] = []
-    var decemberData: [Event] = []
-    var futureMonthData : [Event] = []
     
-    let data = [
-        Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: Date()),
-        Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: Date()),
-        Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: Date()),
-        Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: Date()),
-        Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: Date()),
-        Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: Date()),
-        Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: Date()),
-        Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: Date()),
-        Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: Date()),
-        Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: Date()),
-        Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: Date()),
-        Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: Date()),
-        Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: Date()),
-        Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: Date()),
-        Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: Date()),
+    
+
+    var data : [Event] = [
+
     ]
     
     fileprivate let collectionView:UICollectionView = {
@@ -79,10 +53,67 @@ class CountdownViewController: UIViewController{
         return cv
     }()
     
+    func placeHolderDataPopulator() {
+        var isoDate = "2020-08-31T10:44:00+0000"
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        var date = dateFormatter.date(from:isoDate)!
+        
+        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
+        data.append(Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date))
+        data.append(Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date))
+        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
+        data.append(Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date))
+        data.append(Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date))
+        
+        //september
+        isoDate = "2020-09-24T10:44:00+0000"
+        date = dateFormatter.date(from:isoDate)!
+        data.append(Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date))
+        data.append(Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date))
+
+        //october
+        isoDate = "2020-10-23T10:44:00+0000"
+        date = dateFormatter.date(from:isoDate)!
+        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
+        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
+        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
+        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
+
+        //november
+        isoDate = "2020-11-01T10:44:00+0000"
+        date = dateFormatter.date(from:isoDate)!
+        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
+        data.append(Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date))
+        data.append(Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date))
+        
+        //december
+        isoDate = "2020-12-31T10:44:00+0000"
+        date = dateFormatter.date(from:isoDate)!
+        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
+        data.append(Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date))
+        data.append(Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date))
+        
+        //next year
+        isoDate = "2021-01-31T10:44:00+0000"
+        date = dateFormatter.date(from:isoDate)!
+        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
+        data.append(Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date))
+        data.append(Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date))
+        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
+        data.append(Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date))
+        data.append(Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date))
+        
+        data.sort(by: { $0.date! > $1.date! })
+        
+    }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        placeHolderDataPopulator()
         populateData()
         
         view.addSubview(collectionView)
@@ -115,44 +146,21 @@ class CountdownViewController: UIViewController{
             let date = event.date!.get(.day, .month, .year)
             
             //change from days to months
-            if daysBetween(start: today, end: event.date!) > 90 {
-               // sortedData.append(14, event)
+            if daysBetween(start: today, end: event.date!) > 90{
+                sortedData[14].events.append(event)
+                sortedData[14].count += 1
             } else if let month = date.month {
                 switch month {
                 case thisMonth:
-                    currentMonthData.append(event)
-                case 1:
-                    januaryData.append(event)
-                case 2:
-                    februaryData.append(event)
-                case 3:
-                    marchData.append(event)
-                case 4:
-                    aprilData.append(event)
-                case 5:
-                    mayData.append(event)
-                case 6:
-                    juneData.append(event)
-                case 7:
-                    julyData.append(event)
-                case 8:
-                    augustData.append(event)
-                case 9:
-                    septemberData.append(event)
-                case 10:
-                    octoberData.append(event)
-                case 11:
-                    novemberData.append(event)
-                case 12:
-                    decemberData.append(event)
+                    sortedData[0].events.append(event)
+                    sortedData[0].count += 1
                 default:
-                    futureMonthData.append(event)
-                
+                    sortedData[month].events.append(event)
+                    sortedData[month].count += 1
+
                 }
             }
         }
-        
-        
     }
     
     func daysBetween(start: Date, end: Date) -> Int {
@@ -170,24 +178,39 @@ extension CountdownViewController: UICollectionViewDelegateFlowLayout, UICollect
         return CGSize(width: collectionView.frame.width/3.3, height: collectionView.frame.width/3)
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return currentMonthData.count
-        case 1:
-            return futureMonthData.count
-        default:
-            return 0
+        
+        
+        for index in 0...numberOfSections(in: collectionView) {
+            if section == index {
+                return sortedData[index].count
+            }
         }
+        
+        
+        //Return count based on section name
+        return sortedData[0].count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventCell", for: indexPath) as! EventCell
-        cell.data = self.data[indexPath.row]
+
+        cell.data = self.sortedData[indexPath.section].events[indexPath.row]
         return cell
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
+       var numSections = 0
+        
+
+        for section in sortedData {
+            if section.count == 0 {
+                sortedData.remove(at: numSections)
+            } else {
+                numSections += 1
+            }
+        }
+
+        return numSections
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -195,11 +218,11 @@ extension CountdownViewController: UICollectionViewDelegateFlowLayout, UICollect
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             
-            func setSection(dataId: DataId) -> DataId{
+            func setSection(dataId: DataSections) -> DataSections{
                 var mutatedId = dataId
                 while dataId.count == 0 && indexer < sortedData.count-1{
                     indexer += 1
-                    mutatedId = sortedData[indexer][0] as! DataId
+                    mutatedId = sortedData[indexer]
 
                 }
                 return mutatedId
@@ -208,32 +231,28 @@ extension CountdownViewController: UICollectionViewDelegateFlowLayout, UICollect
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: collectionViewHeaderReuseIdentifier, for: indexPath) as! customHeader
             
             var indexer = 0
-            var nextSection = sortedData[indexer][0] as! DataId
+            var nextSection = sortedData[indexer]
             nextSection = setSection(dataId: nextSection)
             
 
             switch  indexPath {
-            
-            
-            
-            case[0,0]:
-                print("index path is \(indexPath)")
-                
-                headerView.monthLabel.text = nextSection.month
-                nextSection = setSection(dataId: nextSection)
-                
-          
-            
 
-            
-            case[1,0]:
-                headerView.monthLabel.text = nextSection.month
-                nextSection = setSection(dataId: nextSection)
+                case[0,0]:
+                    headerView.monthLabel.text = sortedData[0].month
+                    nextSection = setSection(dataId: nextSection)
+
+                case[1,0]:
+                    headerView.monthLabel.text = sortedData[1].month
+                    nextSection = setSection(dataId: nextSection)
 
 
-            case[2,0]:
-                headerView.monthLabel.text = nextSection.month
-                nextSection = setSection(dataId: nextSection)
+                case[2,0]:
+                    headerView.monthLabel.text = sortedData[2].month
+                    nextSection = setSection(dataId: nextSection)
+                    
+                case[3,0]:
+                    headerView.monthLabel.text = sortedData[3].month
+                    nextSection = setSection(dataId: nextSection)
 
 
             default:
