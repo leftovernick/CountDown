@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8344400924DE176D00A15AAD /* CountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8344400824DE176D00A15AAD /* CountdownViewController.swift */; };
 		8344400C24DE194500A15AAD /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8344400B24DE194500A15AAD /* EventCollectionViewCell.swift */; };
+		8387331D24E1025A00698A95 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8387331B24E1025A00698A95 /* DataModel.xcdatamodeld */; };
 		839DCC8424DDFB0900A4EF9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839DCC8324DDFB0900A4EF9A /* AppDelegate.swift */; };
 		839DCC8624DDFB0900A4EF9A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839DCC8524DDFB0900A4EF9A /* SceneDelegate.swift */; };
 		839DCC8B24DDFB0900A4EF9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 839DCC8924DDFB0900A4EF9A /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		8344400824DE176D00A15AAD /* CountdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownViewController.swift; sourceTree = "<group>"; };
 		8344400B24DE194500A15AAD /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
+		8387331C24E1025A00698A95 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		839DCC8024DDFB0900A4EF9A /* CountDown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountDown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		839DCC8324DDFB0900A4EF9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		839DCC8524DDFB0900A4EF9A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				839DCC8C24DDFB0900A4EF9A /* Assets.xcassets */,
 				839DCC8E24DDFB0900A4EF9A /* LaunchScreen.storyboard */,
 				839DCC9124DDFB0900A4EF9A /* Info.plist */,
+				8387331B24E1025A00698A95 /* DataModel.xcdatamodeld */,
 			);
 			path = CountDown;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				8344400924DE176D00A15AAD /* CountdownViewController.swift in Sources */,
 				8344400C24DE194500A15AAD /* EventCollectionViewCell.swift in Sources */,
 				839DCC8424DDFB0900A4EF9A /* AppDelegate.swift in Sources */,
+				8387331D24E1025A00698A95 /* DataModel.xcdatamodeld in Sources */,
 				839DCC8624DDFB0900A4EF9A /* SceneDelegate.swift in Sources */,
 				83EBC5A524DFDA2F00B9F6EE /* Event.swift in Sources */,
 				83EBC5A124DFD94F00B9F6EE /* Extensions.swift in Sources */,
@@ -641,6 +645,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8387331B24E1025A00698A95 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8387331C24E1025A00698A95 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 8387331C24E1025A00698A95 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 839DCC7824DDFB0900A4EF9A /* Project object */;
 }
