@@ -146,9 +146,15 @@ class CountdownViewController: UIViewController{
             let date = event.date!.get(.day, .month, .year)
             
             //change from days to months
-            if daysBetween(start: today, end: event.date!) > 90{
-                sortedData[14].events.append(event)
-                sortedData[14].count += 1
+            if monthsBetween(start: today, end: event.date!) > 3 {
+                if thisYear(year: date.year!) {
+                    sortedData[13].events.append(event)
+                    sortedData[13].count += 1
+                } else {
+                    sortedData[14].events.append(event)
+                    sortedData[14].count += 1
+                }
+
             } else if let month = date.month {
                 switch month {
                 case thisMonth:
@@ -163,8 +169,16 @@ class CountdownViewController: UIViewController{
         }
     }
     
-    func daysBetween(start: Date, end: Date) -> Int {
-        return Calendar.current.dateComponents([.day], from: start, to: end).day!
+    func monthsBetween(start: Date, end: Date) -> Int {
+        return Calendar.current.dateComponents([.month], from: start, to: end).month!
+    }
+    
+    func thisYear(year: Int) -> Bool {
+        if year == Calendar.current.component(.year, from: Date()) {
+            return true
+        } else {
+            return false
+        }
     }
 
     
@@ -237,33 +251,69 @@ extension CountdownViewController: UICollectionViewDelegateFlowLayout, UICollect
 
             switch  indexPath {
 
-                case[0,0]:
-                    headerView.monthLabel.text = sortedData[0].month
-                    nextSection = setSection(dataId: nextSection)
+            case[0,0]:
+                headerView.monthLabel.text = sortedData[0].month
+                nextSection = setSection(dataId: nextSection)
 
-                case[1,0]:
-                    headerView.monthLabel.text = sortedData[1].month
-                    nextSection = setSection(dataId: nextSection)
+            case[1,0]:
+                headerView.monthLabel.text = sortedData[1].month
+                nextSection = setSection(dataId: nextSection)
 
 
-                case[2,0]:
-                    headerView.monthLabel.text = sortedData[2].month
-                    nextSection = setSection(dataId: nextSection)
+            case[2,0]:
+                headerView.monthLabel.text = sortedData[2].month
+                nextSection = setSection(dataId: nextSection)
+                
+            case[3,0]:
+                headerView.monthLabel.text = sortedData[3].month
+                nextSection = setSection(dataId: nextSection)
+                
+            case[4,0]:
+                headerView.monthLabel.text = sortedData[4].month
+                nextSection = setSection(dataId: nextSection)
                     
-                case[3,0]:
-                    headerView.monthLabel.text = sortedData[3].month
-                    nextSection = setSection(dataId: nextSection)
+            case[5,0]:
+                headerView.monthLabel.text = sortedData[5].month
+                nextSection = setSection(dataId: nextSection)
 
+            case[6,0]:
+                headerView.monthLabel.text = sortedData[6].month
+                nextSection = setSection(dataId: nextSection)
+
+
+            case[7,0]:
+                headerView.monthLabel.text = sortedData[7].month
+                nextSection = setSection(dataId: nextSection)
+                
+            case[8,0]:
+                headerView.monthLabel.text = sortedData[8].month
+                nextSection = setSection(dataId: nextSection)
+                
+            case[9,0]:
+                headerView.monthLabel.text = sortedData[9].month
+                nextSection = setSection(dataId: nextSection)
+                
+            case[10,0]:
+                headerView.monthLabel.text = sortedData[10].month
+                nextSection = setSection(dataId: nextSection)
+
+            case[11,0]:
+                headerView.monthLabel.text = sortedData[11].month
+                nextSection = setSection(dataId: nextSection)
+
+
+            case[12,0]:
+                headerView.monthLabel.text = sortedData[12].month
+                nextSection = setSection(dataId: nextSection)
+                
+            case[13,0]:
+                headerView.monthLabel.text = sortedData[13].month
+                nextSection = setSection(dataId: nextSection)
 
             default:
-                print("default path is \(indexPath)")
-
-            
-            //default:
-                headerView.monthLabel.text = "Future Months"
+                print("Month value not found")
+                headerView.monthLabel.text = "Other"
             }
-            
-            
             
             return headerView
 
