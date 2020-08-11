@@ -4,7 +4,7 @@
 //
 //  Created by Nick Gray on 8/9/20.
 //
-
+/*
 import UIKit
 
 class Event: NSObject {
@@ -36,3 +36,4 @@ class Event: NSObject {
     }
  */
 }
+ */

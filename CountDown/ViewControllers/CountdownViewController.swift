@@ -6,13 +6,13 @@
 //
 
 import UIKit
-
+import CoreData
 
 
 struct DataSections {
     var month = ""
     var count = 0
-    var events : [Event] = []
+    var events : [NSManagedObject] = []
 }
 
 class CountdownViewController: UIViewController{
@@ -39,7 +39,7 @@ class CountdownViewController: UIViewController{
     
     
 
-    var data : [Event] = [
+    var data : [NSManagedObject] = [
 
     ]
     
@@ -60,54 +60,53 @@ class CountdownViewController: UIViewController{
         dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         var date = dateFormatter.date(from:isoDate)!
+
         
-        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
-        data.append(Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date))
-        data.append(Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date))
-        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
-        data.append(Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date))
-        data.append(Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date))
+        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
+        self.saveEvent(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date)
+        self.saveEvent(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date)
+        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
+        self.saveEvent(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date)
+        self.saveEvent(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date)
         
         //september
         isoDate = "2020-09-24T10:44:00+0000"
         date = dateFormatter.date(from:isoDate)!
-        data.append(Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date))
-        data.append(Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date))
+        self.saveEvent(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date)
+        self.saveEvent(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date)
 
         //october
         isoDate = "2020-10-23T10:44:00+0000"
         date = dateFormatter.date(from:isoDate)!
-        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
-        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
-        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
-        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
+        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
+        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
+        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
+        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
 
         //november
         isoDate = "2020-11-01T10:44:00+0000"
         date = dateFormatter.date(from:isoDate)!
-        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
-        data.append(Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date))
-        data.append(Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date))
+        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
+        self.saveEvent(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date)
+        self.saveEvent(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date)
         
         //december
         isoDate = "2020-12-31T10:44:00+0000"
         date = dateFormatter.date(from:isoDate)!
-        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
-        data.append(Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date))
-        data.append(Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date))
+        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
+        self.saveEvent(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date)
+        self.saveEvent(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date)
         
         //next year
         isoDate = "2021-01-31T10:44:00+0000"
         date = dateFormatter.date(from:isoDate)!
-        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
-        data.append(Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date))
-        data.append(Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date))
-        data.append(Event(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date))
-        data.append(Event(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date))
-        data.append(Event(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date))
-        
-        data.sort(by: { $0.date! > $1.date! })
-        
+        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
+        self.saveEvent(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date)
+        self.saveEvent(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date)
+        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
+        self.saveEvent(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date)
+        self.saveEvent(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date)
+                
     }
 
     
@@ -143,11 +142,12 @@ class CountdownViewController: UIViewController{
         let today = Date()
         let thisMonth = today.get(.month)
         for event in data {
-            let date = event.date!.get(.day, .month, .year)
+            let date = event.value(forKeyPath: "date") as! Date
+            let components = date.get(.day, .month, .year)
             
             //change from days to months
-            if monthsBetween(start: today, end: event.date!) > 3 {
-                if thisYear(year: date.year!) {
+            if monthsBetween(start: today, end: date) > 3 {
+                if thisYear(year: components.year!) {
                     sortedData[13].events.append(event)
                     sortedData[13].count += 1
                 } else {
@@ -155,7 +155,7 @@ class CountdownViewController: UIViewController{
                     sortedData[14].count += 1
                 }
 
-            } else if let month = date.month {
+            } else if let month = components.month {
                 switch month {
                 case thisMonth:
                     sortedData[0].events.append(event)
@@ -167,6 +167,40 @@ class CountdownViewController: UIViewController{
                 }
             }
         }
+    }
+    
+    func saveEvent(title: String, image: UIImage, date: Date) {
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+            return
+          }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let entity =
+            NSEntityDescription.entity(forEntityName: "Event",
+                                       in: managedContext)!
+        
+        let event = NSManagedObject(entity: entity,
+                                       insertInto: managedContext)
+        
+        let imgData = image.pngData()
+
+        
+        event.setValue(title, forKeyPath: "title")
+        event.setValue(imgData, forKeyPath: "image")
+        event.setValue(date, forKeyPath: "date")
+     
+        do {
+            try managedContext.save()
+            data.append(event)
+          } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+          }
+
+
     }
     
     func monthsBetween(start: Date, end: Date) -> Int {
@@ -332,12 +366,12 @@ extension CountdownViewController: UICollectionViewDelegateFlowLayout, UICollect
 
 class EventCell: UICollectionViewCell {
     
-    var data: Event? {
+    var data: NSManagedObject? {
         didSet {
         
             guard let data = data else {return}
-            bg.image = data.image
-            txt.text = data.title
+            bg.image = UIImage(data: (data.value(forKeyPath: "image") as? Data)!)
+            txt.text = data.value(forKeyPath: "title") as? String
         }
     }
     

@@ -10,6 +10,7 @@
 		8344400924DE176D00A15AAD /* CountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8344400824DE176D00A15AAD /* CountdownViewController.swift */; };
 		8344400C24DE194500A15AAD /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8344400B24DE194500A15AAD /* EventCollectionViewCell.swift */; };
 		8387331D24E1025A00698A95 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8387331B24E1025A00698A95 /* DataModel.xcdatamodeld */; };
+		8387331F24E1FA5100698A95 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8387331E24E1FA5100698A95 /* DatabaseHelper.swift */; };
 		839DCC8424DDFB0900A4EF9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839DCC8324DDFB0900A4EF9A /* AppDelegate.swift */; };
 		839DCC8624DDFB0900A4EF9A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839DCC8524DDFB0900A4EF9A /* SceneDelegate.swift */; };
 		839DCC8B24DDFB0900A4EF9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 839DCC8924DDFB0900A4EF9A /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 		8344400824DE176D00A15AAD /* CountdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownViewController.swift; sourceTree = "<group>"; };
 		8344400B24DE194500A15AAD /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
 		8387331C24E1025A00698A95 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		8387331E24E1FA5100698A95 /* DatabaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
 		839DCC8024DDFB0900A4EF9A /* CountDown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountDown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		839DCC8324DDFB0900A4EF9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		839DCC8524DDFB0900A4EF9A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,11 +125,11 @@
 		839DCC8224DDFB0900A4EF9A /* CountDown */ = {
 			isa = PBXGroup;
 			children = (
+				83EBC59E24DFD7E500B9F6EE /* Helpers */,
 				83EBC5A324DFDA0F00B9F6EE /* Models */,
 				839DCC8924DDFB0900A4EF9A /* Main.storyboard */,
 				839DCC8324DDFB0900A4EF9A /* AppDelegate.swift */,
 				839DCC8524DDFB0900A4EF9A /* SceneDelegate.swift */,
-				83EBC59E24DFD7E500B9F6EE /* Helpers */,
 				8344400A24DE192400A15AAD /* Cells */,
 				8344400724DE171D00A15AAD /* ViewControllers */,
 				839DCC8C24DDFB0900A4EF9A /* Assets.xcassets */,
@@ -160,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				83EBC5A024DFD94F00B9F6EE /* Extensions.swift */,
+				8387331E24E1FA5100698A95 /* DatabaseHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				8344400C24DE194500A15AAD /* EventCollectionViewCell.swift in Sources */,
 				839DCC8424DDFB0900A4EF9A /* AppDelegate.swift in Sources */,
 				8387331D24E1025A00698A95 /* DataModel.xcdatamodeld in Sources */,
+				8387331F24E1FA5100698A95 /* DatabaseHelper.swift in Sources */,
 				839DCC8624DDFB0900A4EF9A /* SceneDelegate.swift in Sources */,
 				83EBC5A524DFDA2F00B9F6EE /* Event.swift in Sources */,
 				83EBC5A124DFD94F00B9F6EE /* Extensions.swift in Sources */,
