@@ -53,6 +53,7 @@ class CountdownViewController: UIViewController{
         return cv
     }()
     
+    
     func placeHolderDataPopulator() {
         var isoDate = "2020-08-31T10:44:00+0000"
 
@@ -129,9 +130,9 @@ class CountdownViewController: UIViewController{
 
         
         navigationController?.title = "Countdown"
-        let addBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: nil, action: #selector(add))
+        let addBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(add))
         navigationItem.rightBarButtonItem = addBtn
-        let settingsBtn = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: nil, action: #selector(settings))
+        let settingsBtn = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(settings))
         navigationItem.leftBarButtonItem = settingsBtn
         
         
@@ -216,7 +217,9 @@ class CountdownViewController: UIViewController{
     }
 
     
-    @objc func add() { }
+    @objc func add() {
+        self.performSegue(withIdentifier: "newCountdownSegue", sender: nil)
+    }
     
     @objc func settings() { }
 }
