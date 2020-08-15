@@ -10,9 +10,12 @@ import CoreData
 
 class NewCountdownViewController: UIViewController {
     
+    var mainViewController: CountdownViewController?
     let tableView = UITableView()
     var safeArea: UILayoutGuide!
     var searchTitle = ""
+    var image = #imageLiteral(resourceName: "CountdownDefault")
+    
     
 
     override func loadView() {
@@ -100,6 +103,8 @@ extension NewCountdownViewController: UITableViewDataSource, UITableViewDelegate
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! ImageCell
         
+            cell.data = image
+            
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "leftoverCell", for: indexPath) as! LeftoverCell
@@ -130,12 +135,15 @@ extension NewCountdownViewController: UITableViewDataSource, UITableViewDelegate
             backItem.title = "Back"
             navigationItem.backBarButtonItem = backItem
             
+            
             let imageVC = segue.destination as! AddImageViewController
+            imageVC.mainViewController = self
             imageVC.searchTitle = self.searchTitle
             
         }
 
     }
+    
     
 }
 
@@ -195,8 +203,6 @@ class TitleCell: UITableViewCell {
     
     var tfChangedAction : (() -> ())?
 
-
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
@@ -216,9 +222,6 @@ class TitleCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func getTitle() -> String {
-        return tf.text ?? ""
-    }
     
     @objc func textFieldDidChange() {
         tfChangedAction?()
@@ -229,6 +232,13 @@ class TitleCell: UITableViewCell {
 
 
 class ImageCell: UITableViewCell {
+    
+    var data: UIImage? {
+        didSet {
+            guard let data = data else {return}
+            iv.image = data
+        }
+    }
     
     fileprivate let iv : UIImageView = {
         let imv = UIImageView()

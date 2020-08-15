@@ -237,8 +237,6 @@ extension CountdownViewController: UICollectionViewDelegateFlowLayout, UICollect
             }
         }
         
-        
-        //Return count based on section name
         return sortedData[0].count
     }
     

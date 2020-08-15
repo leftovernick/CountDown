@@ -10,6 +10,7 @@ import WebKit
 
 class AddImageViewController: UIViewController {
 
+    var mainViewController: NewCountdownViewController?
     let tableView = UITableView()
     var safeArea: UILayoutGuide!
     var imagePicker: UIImagePickerController!
@@ -17,6 +18,7 @@ class AddImageViewController: UIViewController {
     var searchTitle = ""
     let pasteboard = UIPasteboard.general
     
+    /*
     lazy var webView: WKWebView = {
         let web = WKWebView.init(frame: UIScreen.main.bounds)
         web.navigationDelegate = self
@@ -28,6 +30,7 @@ class AddImageViewController: UIViewController {
         web.load(request)
         return web
     }()
+ */
 
     
     override func loadView() {
@@ -57,7 +60,18 @@ class AddImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-    }    
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if self.isMovingFromParent {
+            mainViewController?.image = image
+            mainViewController?.tableView.reloadData()
+        }
+    }
+    
+
 }
 
 extension AddImageViewController: UITableViewDataSource, UITableViewDelegate {
@@ -153,20 +167,28 @@ extension AddImageViewController: UINavigationControllerDelegate, UIImagePickerC
             tableView.reloadData()
 
         }
+        
     }
+
 }
 
 extension AddImageViewController: WKNavigationDelegate, UIWebViewDelegate {
     func goToWebview() {
-            let controller = UIViewController()
-            controller.view.addSubview(self.webView)
-            self.present(controller,animated: true)
+        let controller = CustomWebView()
+        controller.searchTitle = self.searchTitle
+        controller.returnTitleAction = { [unowned self] in
+            if self.pasteboard.hasImages{
+             
+                image = self.pasteboard.image ?? image
+                print("detected image")
+            }
+            tableView.reloadData()
+            
         }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("FINISHED WEBVIEW")
+        self.present(controller, animated: true)
+        }
     }
-}
+
 
 class ImagePreviewCell: UITableViewCell {
     
@@ -216,5 +238,35 @@ class SelectionCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class CustomWebView : UIViewController, WKNavigationDelegate {
+    
+    var searchTitle = ""
+    var returnTitleAction:  (() -> ())?
+
+    lazy var webView: WKWebView = {
+        let web = WKWebView.init(frame: UIScreen.main.bounds)
+        web.navigationDelegate = self
+        
+        var urlString = "https://www.google.com/search?q=<SEARCH TERM>&source=lnms&tbm=isch"
+        searchTitle = searchTitle.replacingOccurrences(of: " ", with: "+")
+        urlString = urlString.replacingOccurrences(of: "<SEARCH TERM>", with: searchTitle)
+        
+        let url = URL.init(string: urlString)!
+        let request = URLRequest.init(url: url)
+        web.load(request)
+        
+        return web
+    }()
+    
+    override func loadView() {
+        super.loadView()
+        view.addSubview(webView)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        returnTitleAction?()
     }
 }
