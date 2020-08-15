@@ -63,10 +63,29 @@
                         <barButtonItem key="backBarButtonItem" title="Close" id="fO4-4H-08w"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <segue destination="luw-vZ-hcC" kind="show" identifier="addImageSegue" id="z2k-31-Fcy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZhQ-rM-kuN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1828" y="-183"/>
+        </scene>
+        <!--Image-->
+        <scene sceneID="WHG-ds-ZM3">
+            <objects>
+                <viewController id="luw-vZ-hcC" customClass="AddImageViewController" customModule="CountDown" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gfa-No-JK9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ZVZ-1s-Amb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Image" id="SU6-v5-s1F"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uMd-gz-VM1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2801" y="-183"/>
         </scene>
         <!--Event Name-->
         <scene sceneID="4fp-lH-gMP">

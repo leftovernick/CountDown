@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8344400924DE176D00A15AAD /* CountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8344400824DE176D00A15AAD /* CountdownViewController.swift */; };
 		8344400C24DE194500A15AAD /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8344400B24DE194500A15AAD /* EventCollectionViewCell.swift */; };
+		836DB9BF24E7553100D0D559 /* AddImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836DB9BE24E7553100D0D559 /* AddImageViewController.swift */; };
 		8387331D24E1025A00698A95 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8387331B24E1025A00698A95 /* DataModel.xcdatamodeld */; };
 		8387331F24E1FA5100698A95 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8387331E24E1FA5100698A95 /* DatabaseHelper.swift */; };
 		8387332124E21A2E00698A95 /* NewCountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8387332024E21A2E00698A95 /* NewCountdownViewController.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		8344400824DE176D00A15AAD /* CountdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownViewController.swift; sourceTree = "<group>"; };
 		8344400B24DE194500A15AAD /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
+		836DB9BE24E7553100D0D559 /* AddImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageViewController.swift; sourceTree = "<group>"; };
 		8387331C24E1025A00698A95 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		8387331E24E1FA5100698A95 /* DatabaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
 		8387332024E21A2E00698A95 /* NewCountdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCountdownViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			children = (
 				8344400824DE176D00A15AAD /* CountdownViewController.swift */,
 				8387332024E21A2E00698A95 /* NewCountdownViewController.swift */,
+				836DB9BE24E7553100D0D559 /* AddImageViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				8387331F24E1FA5100698A95 /* DatabaseHelper.swift in Sources */,
 				839DCC8624DDFB0900A4EF9A /* SceneDelegate.swift in Sources */,
 				83EBC5A524DFDA2F00B9F6EE /* Event.swift in Sources */,
+				836DB9BF24E7553100D0D559 /* AddImageViewController.swift in Sources */,
 				83EBC5A124DFD94F00B9F6EE /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

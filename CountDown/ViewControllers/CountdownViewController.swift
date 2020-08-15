@@ -101,7 +101,7 @@ class CountdownViewController: UIViewController{
         //next year
         isoDate = "2021-01-31T10:44:00+0000"
         date = dateFormatter.date(from:isoDate)!
-        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
+        self.saveEvent(title: "Cyberpunk 2077", image: #imageLiteral(resourceName: "testimage2"), date: date)
         self.saveEvent(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date)
         self.saveEvent(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date)
         self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)

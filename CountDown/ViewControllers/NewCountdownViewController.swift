@@ -29,7 +29,6 @@ class NewCountdownViewController: UIViewController {
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        //tableView.backgroundColor = .secondarySystemBackground
         tableView.estimatedRowHeight = 50
         tableView.isScrollEnabled = false
         tableView.dataSource = self
@@ -84,36 +83,40 @@ extension NewCountdownViewController: UITableViewDataSource, UITableViewDelegate
             let cell = tableView.dequeueReusableCell(withIdentifier: "dateCell", for: indexPath) as! DateCell
             
             return cell
-            
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "titleCell", for: indexPath) as! TitleCell
-        
             
             return cell
-            
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! ImageCell
         
-            
             return cell
-            
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "leftoverCell", for: indexPath) as! LeftoverCell
         
-            
             return cell
         }
-
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         switch indexPath.row {
         case 2: return 150
-        case 3: return 1000
         default:
             return 50
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 2 {
+            performSegue(withIdentifier: "addImageSegue", sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationItem.backBarButtonItem = backItem
     }
 }
 
@@ -204,12 +207,11 @@ class ImageCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        //backgroundColor = .blue
         accessoryType = .disclosureIndicator
         selectionStyle = .default
         textLabel?.text = "Image"
-        
         backgroundColor = .secondarySystemBackground
+        
         contentView.addSubview(iv)
         iv.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1).isActive = true
         iv.topAnchor.constraint(equalTo: contentView.topAnchor, constant: -4).isActive = true
