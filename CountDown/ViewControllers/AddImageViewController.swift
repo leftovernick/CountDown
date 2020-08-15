@@ -6,14 +6,28 @@
 //
 
 import UIKit
+import WebKit
 
-class AddImageViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class AddImageViewController: UIViewController {
 
     let tableView = UITableView()
     var safeArea: UILayoutGuide!
     var imagePicker: UIImagePickerController!
     var image = UIImage(imageLiteralResourceName: "CountdownDefault")
+    var searchTitle = ""
     let pasteboard = UIPasteboard.general
+    
+    lazy var webView: WKWebView = {
+        let web = WKWebView.init(frame: UIScreen.main.bounds)
+        web.navigationDelegate = self
+        var urlString = "https://www.google.com/search?q=<SEARCH TERM>&source=lnms&tbm=isch"
+        searchTitle = searchTitle.replacingOccurrences(of: " ", with: "+")
+        urlString = urlString.replacingOccurrences(of: "<SEARCH TERM>", with: searchTitle)
+        let url = URL.init(string: urlString)!
+        let request = URLRequest.init(url: url)
+        web.load(request)
+        return web
+    }()
 
     
     override func loadView() {
@@ -23,6 +37,7 @@ class AddImageViewController: UIViewController, UINavigationControllerDelegate, 
         setupTableView()
 
     }
+    
     func setupTableView() {
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -42,19 +57,7 @@ class AddImageViewController: UIViewController, UINavigationControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        imagePicker.dismiss(animated: true, completion: nil)
-        if let img = info[.originalImage] as? UIImage {
-            image = img
-            tableView.reloadData()
-
-        }
-    }
-
-    
-    
+    }    
 }
 
 extension AddImageViewController: UITableViewDataSource, UITableViewDelegate {
@@ -123,6 +126,8 @@ extension AddImageViewController: UITableViewDataSource, UITableViewDelegate {
 
             present(imagePicker, animated: true, completion: nil)
             
+        case 3:
+            self.goToWebview()
         case 4:
             if pasteboard.hasImages{
              
@@ -137,8 +142,30 @@ extension AddImageViewController: UITableViewDataSource, UITableViewDelegate {
 
         }
     }
+}
+
+extension AddImageViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        imagePicker.dismiss(animated: true, completion: nil)
+        if let img = info[.originalImage] as? UIImage {
+            image = img
+            tableView.reloadData()
+
+        }
+    }
+}
+
+extension AddImageViewController: WKNavigationDelegate, UIWebViewDelegate {
+    func goToWebview() {
+            let controller = UIViewController()
+            controller.view.addSubview(self.webView)
+            self.present(controller,animated: true)
+        }
     
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("FINISHED WEBVIEW")
+    }
 }
 
 class ImagePreviewCell: UITableViewCell {

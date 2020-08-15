@@ -12,6 +12,7 @@ class NewCountdownViewController: UIViewController {
     
     let tableView = UITableView()
     var safeArea: UILayoutGuide!
+    var searchTitle = ""
     
 
     override func loadView() {
@@ -52,6 +53,11 @@ class NewCountdownViewController: UIViewController {
         
     }
     
+    func updateTitle(title: String) {
+        searchTitle = title
+    }
+
+    
     @objc func cancel() {
         _ = navigationController?.popViewController(animated: true)
     }
@@ -85,6 +91,10 @@ extension NewCountdownViewController: UITableViewDataSource, UITableViewDelegate
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "titleCell", for: indexPath) as! TitleCell
+            cell.tfChangedAction = { [unowned self] in
+                
+                self.searchTitle = cell.tf.text!
+            }
             
             return cell
         case 2:
@@ -114,10 +124,19 @@ extension NewCountdownViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let backItem = UIBarButtonItem()
-        backItem.title = "Back"
-        navigationItem.backBarButtonItem = backItem
+        super.prepare(for: segue, sender: sender)
+        if segue.identifier == "addImageSegue" {
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
+            navigationItem.backBarButtonItem = backItem
+            
+            let imageVC = segue.destination as! AddImageViewController
+            imageVC.searchTitle = self.searchTitle
+            
+        }
+
     }
+    
 }
 
 class DateCell: UITableViewCell {
@@ -170,9 +189,14 @@ class TitleCell: UITableViewCell {
         txtf.autocapitalizationType = .words
         txtf.clearButtonMode = .whileEditing
 
+
         return txtf
     }()
     
+    var tfChangedAction : (() -> ())?
+
+
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
@@ -184,11 +208,23 @@ class TitleCell: UITableViewCell {
         tf.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
         tf.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8).isActive = true
         tf.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4).isActive = true
+        tf.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func getTitle() -> String {
+        return tf.text ?? ""
+    }
+    
+    @objc func textFieldDidChange() {
+        tfChangedAction?()
+    }
+    
+
 }
 
 
