@@ -113,7 +113,7 @@ class CountdownViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        placeHolderDataPopulator()
+        //placeHolderDataPopulator()
         populateData()
         
         view.addSubview(collectionView)
