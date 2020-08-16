@@ -19,29 +19,10 @@ class CountdownViewController: UIViewController{
     
     let collectionViewHeaderReuseIdentifier = "HeaderClass"
     
-    var sortedData : [DataSections] = [
-        DataSections(month: "This Month"),
-        DataSections(month: "January"),
-        DataSections(month: "February"),
-        DataSections(month: "March"),
-        DataSections(month: "April"),
-        DataSections(month: "May"),
-        DataSections(month: "June"),
-        DataSections(month: "July"),
-        DataSections(month: "August"),
-        DataSections(month: "September"),
-        DataSections(month: "October"),
-        DataSections(month: "November"),
-        DataSections(month: "December"),
-        DataSections(month: "This Year"),
-        DataSections(month: "More")
-    ]
-    
-    
+    var sortedData : [DataSections] = []
 
-    var data : [NSManagedObject] = [
-
-    ]
+    var data : [NSManagedObject] = []
+    
     
     fileprivate let collectionView:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -53,68 +34,18 @@ class CountdownViewController: UIViewController{
         return cv
     }()
     
-    
-    func placeHolderDataPopulator() {
-        var isoDate = "2020-08-31T10:44:00+0000"
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        var date = dateFormatter.date(from:isoDate)!
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
-        
-        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
-        self.saveEvent(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date)
-        self.saveEvent(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date)
-        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
-        self.saveEvent(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date)
-        self.saveEvent(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date)
-        
-        //september
-        isoDate = "2020-09-24T10:44:00+0000"
-        date = dateFormatter.date(from:isoDate)!
-        self.saveEvent(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date)
-        self.saveEvent(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date)
-
-        //october
-        isoDate = "2020-10-23T10:44:00+0000"
-        date = dateFormatter.date(from:isoDate)!
-        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
-        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
-        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
-        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
-
-        //november
-        isoDate = "2020-11-01T10:44:00+0000"
-        date = dateFormatter.date(from:isoDate)!
-        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
-        self.saveEvent(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date)
-        self.saveEvent(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date)
-        
-        //december
-        isoDate = "2020-12-31T10:44:00+0000"
-        date = dateFormatter.date(from:isoDate)!
-        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
-        self.saveEvent(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date)
-        self.saveEvent(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date)
-        
-        //next year
-        isoDate = "2021-01-31T10:44:00+0000"
-        date = dateFormatter.date(from:isoDate)!
-        self.saveEvent(title: "Cyberpunk 2077", image: #imageLiteral(resourceName: "testimage2"), date: date)
-        self.saveEvent(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date)
-        self.saveEvent(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date)
-        self.saveEvent(title: "Spelunky 2", image: #imageLiteral(resourceName: "testImage"), date: date)
-        self.saveEvent(title: "Gear", image: #imageLiteral(resourceName: "settings"), date: date)
-        self.saveEvent(title: "Default", image: #imageLiteral(resourceName: "CountdownDefault"), date: date)
-                
+        loadFromCore()
+        populateData()
+        collectionView.reloadData()
+          
     }
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //placeHolderDataPopulator()
-        populateData()
         
         view.addSubview(collectionView)
         view.backgroundColor = .secondarySystemBackground
@@ -140,6 +71,27 @@ class CountdownViewController: UIViewController{
     }
     
     func populateData() {
+        
+        sortedData.removeAll()
+        sortedData = [
+            DataSections(month: "This Month"),
+            DataSections(month: "January"),
+            DataSections(month: "February"),
+            DataSections(month: "March"),
+            DataSections(month: "April"),
+            DataSections(month: "May"),
+            DataSections(month: "June"),
+            DataSections(month: "July"),
+            DataSections(month: "August"),
+            DataSections(month: "September"),
+            DataSections(month: "October"),
+            DataSections(month: "November"),
+            DataSections(month: "December"),
+            DataSections(month: "This Year"),
+            DataSections(month: "More")
+        ]
+        
+        
         let today = Date()
         let thisMonth = today.get(.month)
         for event in data {
@@ -168,6 +120,27 @@ class CountdownViewController: UIViewController{
                 }
             }
         }
+        data.removeAll()
+        print("After populating data array size is \(data.count)")
+    }
+    
+    func loadFromCore() {
+        guard let appDelegate =
+           UIApplication.shared.delegate as? AppDelegate else {
+             return
+         }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Event")
+        
+        do {
+            data = try managedContext.fetch(fetchRequest)
+          } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+          }
     }
     
     func saveEvent(title: String, image: UIImage, date: Date) {
@@ -201,6 +174,8 @@ class CountdownViewController: UIViewController{
             print("Could not save. \(error), \(error.userInfo)")
           }
 
+        populateData()
+        collectionView.reloadData()
 
     }
     
@@ -213,6 +188,16 @@ class CountdownViewController: UIViewController{
             return true
         } else {
             return false
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if segue.identifier == "newCountdownSegue" {
+           
+            let newVC = segue.destination as! NewCountdownViewController
+            newVC.mainViewController = self
         }
     }
 

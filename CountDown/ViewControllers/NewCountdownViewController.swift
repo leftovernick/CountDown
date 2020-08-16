@@ -49,9 +49,9 @@ class NewCountdownViewController: UIViewController {
         super.viewDidLoad()
         
         navigationController?.title = "New Countdown"
-        let doneBtn = UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(cancel))
+        let doneBtn = UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(add))
         navigationItem.rightBarButtonItem = doneBtn
-        let cancelBtn = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(add))
+        let cancelBtn = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel))
         navigationItem.leftBarButtonItem = cancelBtn
         
     }
@@ -66,8 +66,9 @@ class NewCountdownViewController: UIViewController {
     }
     
     @objc func add() {
-        //Todo: write new Event to CoreData
-        //      refresh collectionView
+        let date1 = Date()
+        print("Before adding data array size is \(mainViewController?.data.count)")
+        mainViewController?.saveEvent(title: searchTitle, image: image, date: date1)
         _ = navigationController?.popViewController(animated: true)
 
     }
