@@ -14,6 +14,7 @@ class NewCountdownViewController: UIViewController {
     let tableView = UITableView()
     var safeArea: UILayoutGuide!
     var searchTitle = ""
+    var datePicker: UIDatePicker?
     var image = #imageLiteral(resourceName: "CountdownDefault")
     
     
@@ -66,9 +67,8 @@ class NewCountdownViewController: UIViewController {
     }
     
     @objc func add() {
-        let date1 = Date()
-        print("Before adding data array size is \(mainViewController?.data.count)")
-        mainViewController?.saveEvent(title: searchTitle, image: image, date: date1)
+        let eventDate = self.datePicker!.date
+        mainViewController?.saveEvent(title: searchTitle, image: image, date: eventDate)
         _ = navigationController?.popViewController(animated: true)
 
     }
@@ -91,7 +91,8 @@ extension NewCountdownViewController: UITableViewDataSource, UITableViewDelegate
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "dateCell", for: indexPath) as! DateCell
-            
+            datePicker = cell.dp
+
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "titleCell", for: indexPath) as! TitleCell
@@ -187,6 +188,8 @@ class DateCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
     
 }
 

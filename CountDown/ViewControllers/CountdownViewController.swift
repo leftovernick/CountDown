@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 
 
+
 struct DataSections {
     var month = ""
     var count = 0
@@ -18,9 +19,9 @@ struct DataSections {
 class CountdownViewController: UIViewController{
     
     let collectionViewHeaderReuseIdentifier = "HeaderClass"
+    var selectedEvent = Event()
     
     var sortedData : [DataSections] = []
-
     var data : [NSManagedObject] = []
     
     
@@ -194,10 +195,22 @@ class CountdownViewController: UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationItem.backBarButtonItem = backItem
+
+        
         if segue.identifier == "newCountdownSegue" {
            
             let newVC = segue.destination as! NewCountdownViewController
             newVC.mainViewController = self
+        } else if segue.identifier == "showEventSegue" {
+            
+            let viewVC = segue.destination as! ViewCountdownViewController
+            viewVC.mainViewController = self
+            viewVC.event = selectedEvent
+
+
         }
     }
 
@@ -347,7 +360,12 @@ extension CountdownViewController: UICollectionViewDelegateFlowLayout, UICollect
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height/15)
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedEvent = sortedData[indexPath.section].events[indexPath.row] as! Event
+        
+        self.performSegue(withIdentifier: "showEventSegue", sender: nil)
+
+    }
 }
 
 class EventCell: UICollectionViewCell {
@@ -357,7 +375,19 @@ class EventCell: UICollectionViewCell {
         
             guard let data = data else {return}
             bg.image = UIImage(data: (data.value(forKeyPath: "image") as? Data)!)
-            txt.text = data.value(forKeyPath: "title") as? String
+            let date = data.value(forKeyPath: "date") as? Date
+            var timeLeft = date?.months(from: Date())
+            if timeLeft! <= 3 {
+                timeLeft = date?.days(from: Date())
+                if timeLeft! == 0 {
+                    timeLeft = date?.hours(from: Date())
+                    
+                    txt.text = "\(timeLeft ?? 0) Hours"
+                }
+                txt.text = "\(timeLeft ?? 0) Days"
+            } else {
+                txt.text = "\(timeLeft ?? 0) Months"
+            }
         }
     }
     

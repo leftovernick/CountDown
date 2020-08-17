@@ -17,20 +17,6 @@ class AddImageViewController: UIViewController {
     var image = UIImage(imageLiteralResourceName: "CountdownDefault")
     var searchTitle = ""
     let pasteboard = UIPasteboard.general
-    
-    /*
-    lazy var webView: WKWebView = {
-        let web = WKWebView.init(frame: UIScreen.main.bounds)
-        web.navigationDelegate = self
-        var urlString = "https://www.google.com/search?q=<SEARCH TERM>&source=lnms&tbm=isch"
-        searchTitle = searchTitle.replacingOccurrences(of: " ", with: "+")
-        urlString = urlString.replacingOccurrences(of: "<SEARCH TERM>", with: searchTitle)
-        let url = URL.init(string: urlString)!
-        let request = URLRequest.init(url: url)
-        web.load(request)
-        return web
-    }()
- */
 
     
     override func loadView() {
@@ -244,6 +230,7 @@ class SelectionCell: UITableViewCell {
 class CustomWebView : UIViewController, WKNavigationDelegate {
     
     var searchTitle = ""
+    var safeArea: UILayoutGuide!
     var returnTitleAction:  (() -> ())?
 
     lazy var webView: WKWebView = {
@@ -263,6 +250,7 @@ class CustomWebView : UIViewController, WKNavigationDelegate {
     
     override func loadView() {
         super.loadView()
+        safeArea = view.layoutMarginsGuide
         view.addSubview(webView)
     }
     
