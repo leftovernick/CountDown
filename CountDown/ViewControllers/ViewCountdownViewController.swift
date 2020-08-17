@@ -16,8 +16,8 @@ class ViewCountdownViewController: UIViewController {
     var hourslb = UILabel()
     var minuteslb = UILabel()
     var secondslb = UILabel()
-    var image = UIImageView()
-    
+    let stackView = UIStackView()
+    let subStackView = UIStackView()
     var event = Event()
     var timer: Timer?
     
@@ -40,17 +40,15 @@ class ViewCountdownViewController: UIViewController {
     
     func setupTimerlb() {
         
-        let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 16
+        stackView.spacing = 4
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: datelb.bottomAnchor, constant: 10).isActive = true
         
-        let subStackView = UIStackView()
         subStackView.axis = .horizontal
-        subStackView.spacing = 16
+        subStackView.spacing = 4
         subStackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(subStackView)
         subStackView.centerXAnchor.constraint(equalTo: stackView.centerXAnchor).isActive = true
@@ -58,10 +56,10 @@ class ViewCountdownViewController: UIViewController {
         
       
         //Days
-        dayslb = UILabel(frame: CGRect(x: 20 , y: datelb.frame.maxY + 4, width: 65, height: 50))
+        dayslb = UILabel()
         dayslb.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(dayslb)
-        dayslb.widthAnchor.constraint(equalToConstant: 65).isActive = true
+        dayslb.widthAnchor.constraint(equalToConstant: 75).isActive = true
         dayslb.heightAnchor.constraint(equalToConstant: 50).isActive = true
    
         dayslb.font = UIFont.systemFont(ofSize: 40, weight: .light)
@@ -69,12 +67,12 @@ class ViewCountdownViewController: UIViewController {
         dayslb.textAlignment = .center
         
         
-        let dtitle = UILabel(frame: CGRect(x: dayslb.frame.minX, y: dayslb.frame.maxY, width: 65, height: 50))
+        let dtitle = UILabel()
         subStackView.addArrangedSubview(dtitle)
         dtitle.text = "Days"
         
         dtitle.topAnchor.constraint(equalTo: dayslb.bottomAnchor, constant: -10).isActive = true
-        dtitle.widthAnchor.constraint(equalToConstant: 65).isActive = true
+        dtitle.widthAnchor.constraint(equalToConstant: 75).isActive = true
         dtitle.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         dtitle.font = UIFont.systemFont(ofSize: 16, weight: .light)
@@ -83,22 +81,22 @@ class ViewCountdownViewController: UIViewController {
         
         
         //Hours
-        hourslb = UILabel(frame: CGRect(x: dayslb.frame.maxX, y: datelb.frame.maxY + 4, width: 65, height: 50))
+        hourslb = UILabel()
         hourslb.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(hourslb)
-        hourslb.widthAnchor.constraint(equalToConstant: 65).isActive = true
+        hourslb.widthAnchor.constraint(equalToConstant: 75).isActive = true
         hourslb.heightAnchor.constraint(equalToConstant: 50).isActive = true
     
         hourslb.font = UIFont.systemFont(ofSize: 40, weight: .light)
         hourslb.textColor = .label
         hourslb.textAlignment = .center
         
-        let htitle = UILabel(frame: CGRect(x: hourslb.frame.minX, y: hourslb.frame.maxY, width: 65, height: 50))
+        let htitle = UILabel()
         subStackView.addArrangedSubview(htitle)
         htitle.text = "Hours"
         
         htitle.topAnchor.constraint(equalTo: hourslb.bottomAnchor, constant: -10).isActive = true
-        htitle.widthAnchor.constraint(equalToConstant: 65).isActive = true
+        htitle.widthAnchor.constraint(equalToConstant: 75).isActive = true
         htitle.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         htitle.font = UIFont.systemFont(ofSize: 16, weight: .light)
@@ -107,22 +105,22 @@ class ViewCountdownViewController: UIViewController {
         
         
         //Minutes
-        minuteslb = UILabel(frame: CGRect(x: view.frame.width / 1.5 , y: datelb.frame.maxY + 4, width: 65, height: 50))
+        minuteslb = UILabel()
         minuteslb.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(minuteslb)
-        minuteslb.widthAnchor.constraint(equalToConstant: 65).isActive = true
+        minuteslb.widthAnchor.constraint(equalToConstant: 75).isActive = true
         minuteslb.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         minuteslb.font = UIFont.systemFont(ofSize: 40, weight: .light)
         minuteslb.textColor = .label
         minuteslb.textAlignment = .center
         
-        let mtitle = UILabel(frame: CGRect(x: minuteslb.frame.minX, y: minuteslb.frame.maxY, width: 65, height: 50))
+        let mtitle = UILabel()
         subStackView.addArrangedSubview(mtitle)
         mtitle.text = "Minutes"
         
         mtitle.topAnchor.constraint(equalTo: minuteslb.bottomAnchor, constant: -10).isActive = true
-        mtitle.widthAnchor.constraint(equalToConstant: 65).isActive = true
+        mtitle.widthAnchor.constraint(equalToConstant: 75).isActive = true
         mtitle.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         mtitle.font = UIFont.systemFont(ofSize: 16, weight: .light)
@@ -131,10 +129,10 @@ class ViewCountdownViewController: UIViewController {
         
         
         //Seconds
-        secondslb = UILabel(frame: CGRect(x: view.frame.width / 2 , y: datelb.frame.maxY + 4, width: 65, height: 50))
+        secondslb = UILabel()
         secondslb.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(secondslb)
-        secondslb.widthAnchor.constraint(equalToConstant: 65).isActive = true
+        secondslb.widthAnchor.constraint(equalToConstant: 75).isActive = true
         secondslb.heightAnchor.constraint(equalToConstant: 50).isActive = true
   
         secondslb.font = UIFont.systemFont(ofSize: 40, weight: .light)
@@ -142,12 +140,12 @@ class ViewCountdownViewController: UIViewController {
         secondslb.textAlignment = .center
         
         
-        let stitle = UILabel(frame: CGRect(x: secondslb.frame.minX, y: secondslb.frame.maxY, width: 65, height: 50))
+        let stitle = UILabel()
         subStackView.addArrangedSubview(stitle)
         stitle.text = "Seconds"
         
         stitle.topAnchor.constraint(equalTo: secondslb.bottomAnchor, constant: -10).isActive = true
-        stitle.widthAnchor.constraint(equalToConstant: 65).isActive = true
+        stitle.widthAnchor.constraint(equalToConstant: 75).isActive = true
         stitle.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         stitle.font = UIFont.systemFont(ofSize: 16, weight: .light)
@@ -158,7 +156,19 @@ class ViewCountdownViewController: UIViewController {
     }
     
     func setupImage() {
+        let iv = UIImageView()
+        view.addSubview(iv)
         
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.image = UIImage(data: event.image!)
+        iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        iv.layer.cornerRadius = 24
+        
+        iv.topAnchor.constraint(equalTo: subStackView.bottomAnchor, constant: 4).isActive = true
+        iv.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+        iv.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+        iv.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
     }
 
 
@@ -184,6 +194,10 @@ class ViewCountdownViewController: UIViewController {
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(blurEffectView)
         
+        let editBtn = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: #selector(edit))
+        navigationItem.rightBarButtonItem = editBtn
+
+        
         timer =  Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
             //still running when leaving view?
             self.updateCounter()
@@ -191,7 +205,7 @@ class ViewCountdownViewController: UIViewController {
         
         setupDatelb()
         setupTimerlb()
-        
+        setupImage()
         updateCounter()
     }
     
@@ -200,7 +214,9 @@ class ViewCountdownViewController: UIViewController {
             textAttributes[NSAttributedString.Key.foregroundColor] = UIColor.label
             navigationController?.navigationBar.titleTextAttributes = textAttributes
         }
-        
+        self.navigationController!.navigationBar.setBackgroundImage(nil, for: .default)
+
+
     }
     
 
@@ -223,6 +239,19 @@ class ViewCountdownViewController: UIViewController {
         
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        let updateVC = segue.destination as! NewCountdownViewController
+        updateVC.updatingViewController = self
+        updateVC.event = self.event
+        updateVC.isEdit = true
+    }
+    
+    @objc func edit() {
+        performSegue(withIdentifier: "editEventSegue", sender: self)
+    }
+    
 }
 
  

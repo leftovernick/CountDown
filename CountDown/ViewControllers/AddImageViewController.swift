@@ -132,6 +132,7 @@ extension AddImageViewController: UITableViewDataSource, UITableViewDelegate {
             if pasteboard.hasImages{
              
                 image = pasteboard.image ?? image
+                pasteboard.images = nil
              
             }
             tableView.reloadData()

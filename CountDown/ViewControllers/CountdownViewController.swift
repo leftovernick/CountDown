@@ -47,6 +47,7 @@ class CountdownViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         view.addSubview(collectionView)
         view.backgroundColor = .secondarySystemBackground
@@ -122,7 +123,6 @@ class CountdownViewController: UIViewController{
             }
         }
         data.removeAll()
-        print("After populating data array size is \(data.count)")
     }
     
     func loadFromCore() {
@@ -383,8 +383,9 @@ class EventCell: UICollectionViewCell {
                     timeLeft = date?.hours(from: Date())
                     
                     txt.text = "\(timeLeft ?? 0) Hours"
+                } else {
+                    txt.text = "\(timeLeft ?? 0) Days"
                 }
-                txt.text = "\(timeLeft ?? 0) Days"
             } else {
                 txt.text = "\(timeLeft ?? 0) Months"
             }

@@ -11,11 +11,14 @@ import CoreData
 class NewCountdownViewController: UIViewController {
     
     var mainViewController: CountdownViewController?
+    var updatingViewController: ViewCountdownViewController?
     let tableView = UITableView()
     var safeArea: UILayoutGuide!
     var searchTitle = ""
     var datePicker: UIDatePicker?
     var image = #imageLiteral(resourceName: "CountdownDefault")
+    var isEdit = false
+    var event = Event()
     
     
 
@@ -24,7 +27,9 @@ class NewCountdownViewController: UIViewController {
         view.backgroundColor = .systemBackground
         safeArea = view.layoutMarginsGuide
         setupTableView()
-
+        if isEdit {
+            image = UIImage(data: (event.image)!)!
+        }
     }
     
     func setupTableView() {
@@ -51,6 +56,9 @@ class NewCountdownViewController: UIViewController {
         
         navigationController?.title = "New Countdown"
         let doneBtn = UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(add))
+        if isEdit {
+            doneBtn.title = "Update"
+        }
         navigationItem.rightBarButtonItem = doneBtn
         let cancelBtn = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel))
         navigationItem.leftBarButtonItem = cancelBtn
@@ -67,10 +75,13 @@ class NewCountdownViewController: UIViewController {
     }
     
     @objc func add() {
-        let eventDate = self.datePicker!.date
-        mainViewController?.saveEvent(title: searchTitle, image: image, date: eventDate)
-        _ = navigationController?.popViewController(animated: true)
-
+        if isEdit {
+            
+        } else {
+            let eventDate = self.datePicker!.date
+            mainViewController?.saveEvent(title: searchTitle, image: image, date: eventDate)
+            _ = navigationController?.popViewController(animated: true)
+        }
     }
 
 }
@@ -92,6 +103,9 @@ extension NewCountdownViewController: UITableViewDataSource, UITableViewDelegate
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "dateCell", for: indexPath) as! DateCell
             datePicker = cell.dp
+            if isEdit {
+                cell.dp.date = event.date!
+            }
 
             return cell
         case 1:
@@ -100,11 +114,13 @@ extension NewCountdownViewController: UITableViewDataSource, UITableViewDelegate
                 
                 self.searchTitle = cell.tf.text!
             }
+            if (isEdit) {
+                cell.tf.text = event.title
+            }
             
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! ImageCell
-        
             cell.data = image
             
             return cell
@@ -141,6 +157,7 @@ extension NewCountdownViewController: UITableViewDataSource, UITableViewDelegate
             let imageVC = segue.destination as! AddImageViewController
             imageVC.mainViewController = self
             imageVC.searchTitle = self.searchTitle
+            imageVC.image = self.image
             
         }
 
