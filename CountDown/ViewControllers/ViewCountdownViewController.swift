@@ -206,6 +206,10 @@ class ViewCountdownViewController: UIViewController {
         setupDatelb()
         setupTimerlb()
         setupImage()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         updateCounter()
     }
     
@@ -221,6 +225,7 @@ class ViewCountdownViewController: UIViewController {
     
 
     func updateCounter() {
+        print("Timer is: \(timer)")
         
         var mutableDate = event.date
         var dateComponent = DateComponents()
@@ -244,12 +249,40 @@ class ViewCountdownViewController: UIViewController {
 
         let updateVC = segue.destination as! NewCountdownViewController
         updateVC.updatingViewController = self
+        updateVC.mainViewController = self.mainViewController
         updateVC.event = self.event
         updateVC.isEdit = true
     }
     
     @objc func edit() {
-        performSegue(withIdentifier: "editEventSegue", sender: self)
+        let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
+                
+            // 2
+        let editAction = UIAlertAction(title: "Edit", style: .default, handler:
+                                        {
+                                            (alert: UIAlertAction!) -> Void in
+                                            self.performSegue(withIdentifier: "editEventSegue", sender: self)
+
+                                        })
+        let deleteAction = UIAlertAction(title: "Delete", style: .default, handler:
+                                            {
+                                                (alert: UIAlertAction!) -> Void in
+                                                self.timer?.invalidate()
+                                                self.timer = nil
+                                                print("DELETING")
+
+                                                self.mainViewController?.deleteEvent(event: self.event)
+                                                _ = self.navigationController?.popViewController(animated: true)
+                                                
+                                            })
+                
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+                
+            optionMenu.addAction(editAction)
+            optionMenu.addAction(deleteAction)
+            optionMenu.addAction(cancelAction)
+                
+            self.present(optionMenu, animated: true, completion: nil)
     }
     
 }

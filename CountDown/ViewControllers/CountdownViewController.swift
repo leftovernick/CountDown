@@ -23,6 +23,7 @@ class CountdownViewController: UIViewController{
     
     var sortedData : [DataSections] = []
     var data : [NSManagedObject] = []
+    var editEvent = Event()
     
     
     fileprivate let collectionView:UICollectionView = {
@@ -178,6 +179,41 @@ class CountdownViewController: UIViewController{
         populateData()
         collectionView.reloadData()
 
+    }
+    
+    
+    func updateEvent() {
+        loadFromCore()
+        
+    }
+    
+    func deleteEvent(event: Event) {
+
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+            return
+          }
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Event")
+
+        request.predicate = NSPredicate(format:"title = %@", event.title!)
+
+        let result = try? context.fetch(request)
+        let resultData = result as! [NSManagedObject]
+
+        for object in resultData {
+            context.delete(object)
+        }
+
+        do {
+            try context.save()
+            print("DELETE: saved!")
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        } catch {
+            // add general error handle here
+        }
+        collectionView.reloadData()
     }
     
     func monthsBetween(start: Date, end: Date) -> Int {

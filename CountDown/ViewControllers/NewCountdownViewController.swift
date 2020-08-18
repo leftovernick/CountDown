@@ -75,13 +75,24 @@ class NewCountdownViewController: UIViewController {
     }
     
     @objc func add() {
+        let eventDate = self.datePicker!.date
+
         if isEdit {
-            
-        } else {
-            let eventDate = self.datePicker!.date
-            mainViewController?.saveEvent(title: searchTitle, image: image, date: eventDate)
-            _ = navigationController?.popViewController(animated: true)
+            updatingViewController!.timer?.invalidate()
+            updatingViewController!.timer = nil
+            mainViewController?.deleteEvent(event: event)
+            event.date = eventDate
+            event.title = searchTitle
+            event.image = image.pngData()
+            updatingViewController!.event = event
+            updatingViewController!.title = event.title
+
+
         }
+        mainViewController?.saveEvent(title: searchTitle, image: image, date: eventDate)
+        
+        _ = navigationController?.popViewController(animated: true)
+
     }
 
 }
@@ -116,6 +127,7 @@ extension NewCountdownViewController: UITableViewDataSource, UITableViewDelegate
             }
             if (isEdit) {
                 cell.tf.text = event.title
+                self.searchTitle = cell.tf.text!
             }
             
             return cell
